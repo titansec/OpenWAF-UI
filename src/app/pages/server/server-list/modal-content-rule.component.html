@@ -1,0 +1,134 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <form
+        class="form-horizontal"
+        id="line-form"
+        #serverForm="ngForm"
+      >
+        <div style="background-color:#fff;">
+          <fieldset>
+            <div class="form-group row">
+              <label class="col-sm-3 control-label">发布站点</label>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">域名</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="host"
+                       id="config_host"
+                       [(ngModel)]="datas.host"
+                />
+              </div>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">端口</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="port"
+                       id="config_port"
+                       [(ngModel)]="datas.port"
+                />
+              </div>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">路径</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="path"
+                       id="config_path"
+                       [(ngModel)]="datas.path"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 control-label">服务器</label>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">upstream</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="forward"
+                       id="config_forward"
+                       [(ngModel)]="datas.forward"
+                />
+              </div>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">服务器IP</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="forward_addr"
+                       id="config_forward_addr"
+                       [(ngModel)]="datas.forward_addr"
+                />
+              </div>
+            </div>
+            <div class="form-group row offset-1">
+              <label class="col-sm-3 control-label">端口</label>
+              <div class="col-sm-7">
+                <input type="text"
+                       class="form-control"
+                       name="forward_port"
+                       id="config_forward_port"
+                       [(ngModel)]="datas.forward_port"
+                />
+              </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                 <label class="col-sm-3 control-label"></label>
+                 <div class="col-sm-4" style="margin-left: 20px;">
+                     <div class="checkbox">
+                         <label>
+                             <input
+                                     type="checkbox"
+                                     name="server_ssl"
+                                     id="server_ssl"
+                                     [(ngModel)]="datas.server_ssl"
+                             > ssl连接
+                         </label>
+                     </div>
+                 </div>
+             </div>-->
+            <div class="form-group row offset-1">
+              <label class="col-md-3 control-label" for="policy">
+                策略
+              </label>
+              <div class="col-md-7">
+                <select class="form-control" id="policy" name="policy"
+                        [(ngModel)]="datas.policy">
+                  <option *ngFor="let item of policy_list"
+                          [value]="item.value"
+                  >{{item.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-12 tt-form-actions-center">
+              <footer>
+                <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit(serverForm)">
+                  确认
+                </button>&nbsp;&nbsp;
+                <button type="button" class="btn tt-btn-info btn-sm" (click)="bsModalRef.hide()">
+                  返回
+                </button>
+              </footer>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

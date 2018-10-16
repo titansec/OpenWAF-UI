@@ -1,0 +1,137 @@
+<div id="content">
+  <div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 col-md-12 col-lg-12">
+      <!-- Widget ID (each widget will need unique ID)-->
+      <div>
+        <!-- widget div-->
+          <!-- widget content -->
+          <div class="widget-body" style="padding: 0 0 0 0px; background: #fff; border-radius: 0.25rem;">
+            <ul id="myTab1" class="nav nav-tabs bordered">
+              <li [class.active]=true>
+                <a routerLink="/pages/policy/secrules/{{_id}}">攻击防护</a>
+              </li>
+              <li [class.active]=false>
+                <a routerLink="/pages/policy/antilink/{{_id}}">防信息滥用</a>
+              </li>
+              <li [class.active]=false>
+                <a routerLink="/pages/policy/limitconn/{{_id}}">防CC</a>
+              </li>
+              <li [class.active]=false>
+                <a routerLink="/pages/policy/antidetection/{{_id}}">防探测</a>
+              </li>
+            </ul>
+            <div class="padding-top-10 col-md-12" style="background: #fff;">
+              <form class="form-horizontal"
+                    #secrulesForm="ngForm">
+                  <div class="col-md-12">
+                <div class="form-group col-md-12" style="padding-top: 20px;">
+                  <legend>基本配置</legend>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-4 control-label">
+                    状态
+                  </div>
+                  <div class="col-md-8">
+                    <label class="radio radio-inline">
+                      <input type="radio" name="state_secrules" id="states_1"
+                             (click)="setStateSecrulesState(true)"
+                             [checked]="datas.config.twaf_secrules.state"
+                             value="1">
+                      开 </label>
+                    <label class="radio radio-inline">
+                      <input type="radio" name="state_secrules" id="states_0"
+                             (click)="setStateSecrulesState(false)"
+                             [checked]="!datas.config.twaf_secrules.state"
+                             value="0">
+                      关 </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-4 control-label">防护级别</label>
+                  <div class="col-md-2">
+                    <select name="protection_level" id="protection_level" class="form-control"
+                            [(ngModel)]="datas.config.twaf_secrules.protection_level">
+                        <option class="col-md-1"
+                                *ngFor="let item of protection_level_list"
+                                [value]="item.value"
+                        >{{item.name}}
+                        </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <legend>高级参数</legend>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-4 control-label">检测内容</div>
+                <div class="form-group">
+                  <div class="col-md-4">
+                    <div class="checkbox">
+                      <label>
+                        <input
+                                id="cookie_detect"
+                                name = "cookie_detect"
+                                [(ngModel)]="tmp.cookie_detect"
+                                [checked]="tmp.cookie_detect"
+                                type="checkbox"
+                        />检测COOKIE中是否包含攻击内容
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input
+                                id="reqbody_state"
+                                name = "reqbody_state"
+                                [(ngModel)]="datas.config.twaf_secrules.reqbody_state"
+                                [checked]="datas.config.twaf_secrules.reqbody_state"
+                                type="checkbox"
+
+                        />检测请求体中是否包含攻击内容
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="rowGroup">
+                        <label class="col-md-4 control-label">请求体检测阈值</label>
+                        <div class="col-md-2" >
+                            <input
+
+                                    type="number"
+                                    name="reqbody_limit"
+                                    id="reqbody_limit"
+                                    [(ngModel)]="datas.config.twaf_secrules.reqbody_limit"
+                                    class="form-control"
+                            />
+                        </div>
+                        <div class="col-md-1" style="padding-top: 5px;">KB</div>
+                    </div>
+                </div>
+                <div class="form-actions tt-form-actions-center" style="padding-bottom: 25px; padding-top: 15px;">
+                  <footer>
+                    <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit(secrulesForm)">
+                      确 认
+                    </button>&nbsp;&nbsp;
+                    <button type="button" class="btn tt-btn-info btn-sm" [routerLink]="['/pages/policy']">
+                      取 消
+                    </button>
+                  </footer>
+                </div>
+                </div>
+            </form>
+
+          </div>
+          <!-- end widget content -->
+        </div>
+        <!-- end widget div -->
+      </div>
+      <!-- end widget -->
+    </article>
+    <!-- WIDGET END -->
+  </div>
+
+</div>

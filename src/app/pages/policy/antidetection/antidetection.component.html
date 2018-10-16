@@ -1,0 +1,130 @@
+<div id="content">
+  <div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 col-md-12 col-lg-12">
+      <!-- Widget ID (each widget will need unique ID)-->
+      <div>
+        <!-- widget div-->
+        <!-- widget content -->
+        <div class="widget-body" style="padding: 0 0 0 0px; background: #fff; border-radius: 0.25rem;">
+          <ul id="myTab1" class="nav nav-tabs bordered">
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/secrules/{{_id}}">攻击防护</a>
+            </li>
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/antilink/{{_id}}">防信息滥用</a>
+            </li>
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/limitconn/{{_id}}">防CC</a>
+            </li>
+            <li [class.active]=true>
+              <a routerLink="/pages/policy/antidetection/{{_id}}">防探测</a>
+            </li>
+          </ul>
+          <div class="padding-top-10 col-md-12" style="background: #fff;">
+            <form class="form-horizontal"
+                  #antidetectionForm="ngForm">
+              <div class="col-md-12">
+                <div class="form-group col-md-12" style="padding-top: 20px;">
+                  <legend>恶意爬虫检测</legend>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-4 control-label">
+                    状态
+                  </div>
+                  <div class="col-md-8">
+                    <label class="radio radio-inline">
+                      <input type="radio" name="crawler_states" id="crawler_states_1"
+                             (click)="setStateCrawlerState(true)"
+                             [checked]="datas.config.twaf_anti_mal_crawler.state"
+                             value="1">
+                      开 </label>
+                    <label class="radio radio-inline">
+                      <input type="radio" name="crawler_states" id="crawler_states_0"
+                             (click)="setStateCrawlerState(false)"
+                             [checked]="!datas.config.twaf_anti_mal_crawler.state"
+                             value="0">
+                      关 </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-4 control-label">爬虫诱捕</div>
+                    <div class="col-md-8">
+                      <div class="checkbox">
+                        <label>
+                          <input
+                                  id="force_scan_robots_state"
+                                  name = "force_scan_robots_state"
+                                  [(ngModel)]="datas.config.twaf_anti_mal_crawler.force_scan_robots_state"
+                                  [checked]="datas.config.twaf_anti_mal_crawler.force_scan_robots_state"
+                                  type="checkbox"
+                          /> 爬虫诱捕链接
+                        </label>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-4 control-label">动作</label>
+                  <div class="col-md-2">
+                    <select name="crawler_action" id="crawler_action" class="form-control"
+                            [(ngModel)]="datas.config.twaf_anti_mal_crawler.action">>
+                      <option class="col-md-1"
+                              *ngFor="let item of crawler_action_list"
+                              [value]="item.value"
+                      >{{item.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="rowGroup" [hidden]="datas.config.twaf_anti_mal_crawler.action !== 'redirect'">
+                    <div class="col-md-2">
+                      <input
+                             name="crawler_redirect_url"
+                             id="crawler_redirect_url"
+                             [(ngModel)]="datas.config.twaf_anti_mal_crawler.redirect_url"
+                             class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <select *ngIf="datas.config.twaf_anti_mal_crawler.action == 'deny'"
+                            name="crawler_action_meta" id="crawler_action_meta" class="form-control"
+                            [(ngModel)]="datas.config.twaf_anti_mal_crawler.action_meta">
+                      <option class="col-md-1"
+                              *ngFor="let item of codeList"
+                              [value]="item.value"
+                      >{{item.text}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-actions tt-form-actions-center" style="padding-bottom: 25px; padding-top: 15px;">
+                  <footer>
+                    <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit(antidetectionForm)">
+                      确 认
+                    </button>&nbsp;&nbsp;
+                    <!-- <button type="button" class="btn btn-primary" (click)="Reset()">
+                       重置
+                     </button>-->
+                    <button type="button" class="btn tt-btn-info btn-sm" [routerLink]="['/pages/policy']">
+                      取 消
+                    </button>
+                  </footer>
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <!-- end widget content -->
+        </div>
+        <!-- end widget div -->
+      </div>
+      <!-- end widget -->
+    </article>
+    <!-- WIDGET END -->
+  </div>
+
+</div>

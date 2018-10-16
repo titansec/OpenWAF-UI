@@ -1,0 +1,212 @@
+<div id="content">
+  <div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 col-md-12 col-lg-12">
+      <!-- Widget ID (each widget will need unique ID)-->
+      <div>
+        <!-- widget div-->
+        <!-- widget content -->
+        <div class="widget-body" style="padding: 0 0 0 0px; background: #fff; border-radius: 0.25rem;">
+          <ul id="myTab1" class="nav nav-tabs bordered">
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/secrules/{{_id}}">攻击防护</a>
+            </li>
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/antilink/{{_id}}">防信息滥用</a>
+            </li>
+            <li [class.active]=true>
+              <a routerLink="/pages/policy/limitconn/{{_id}}">防CC</a>
+            </li>
+            <li [class.active]=false>
+              <a routerLink="/pages/policy/antidetection/{{_id}}">防探测</a>
+            </li>
+          </ul>
+          <div class="padding-top-10 col-md-12" style="background: #fff;">
+            <form class="form-horizontal"
+                  #limitconnForm="ngForm">
+              <div class="col-md-12">
+                <div class="form-group col-md-12" style="padding-top: 20px;">
+                  <legend>防CC</legend>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-4 control-label">
+                    状态
+                  </div>
+                  <div class="col-md-8">
+                    <label class="radio radio-inline">
+                      <input type="radio" name="limit_conn_state" id="limit_conn_state_1"
+                             (click)="setStateLimitState(true)"
+                             [checked]="datas.config.twaf_limit_conn.state"
+                             value="1">
+                      开 </label>
+                    <label class="radio radio-inline">
+                      <input type="radio" name="limit_conn_state" id="limit_conn_state_0"
+                             (click)="setStateLimitState(false)"
+                             [checked]="!datas.config.twaf_limit_conn.state"
+                             value="0">
+                      关 </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-4 control-label">触发阈值</label>
+                  <label class="control-label col-md-5 text-align-left"></label>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label"></label>
+                  <label class="control-label col-md-5" style="text-align:left;">(当满足以下任一条件时，进入CC攻击防护状态)</label>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">每秒请求数</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="req_count_max"
+                              id="req_count_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.trigger_thr.req_count_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">次</div>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">每秒请求流量</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="req_flow_max"
+                              id="req_flow_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.trigger_thr.req_flow_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">B</div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label">清洗阈值</label>
+                  <label class="col-md-5 control-label text-align-left"></label>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label"></label>
+                  <label class="col-md-5 control-label" style="text-align:left;">(当满足以下任一条件时，执行清洗动作)</label>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">单一源IP每秒请求数</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="req_max"
+                              id="req_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.clean_thr.req_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">个</div>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">单一源IP每秒新建连接数</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="new_conn_max"
+                              id="new_conn_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.clean_thr.new_conn_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">个</div>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">单一源IP总连接数</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="conn_max"
+                              id="conn_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.clean_thr.conn_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">个</div>
+                </div>
+                <div class="form-group">
+                  <div class="rowGroup">
+                    <label class="col-md-5 control-label">单一路径每秒请求总数</label>
+                    <div class="col-md-2">
+                      <input
+                              type="number"
+                              name="uri_frequency_max"
+                              id="uri_frequency_max"
+                              [(ngModel)]="datas.config.twaf_limit_conn.clean_thr.uri_frequency_max"
+                              class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="padding-top: 5px;">个</div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label">动作</label>
+                  <div class="col-md-2">
+                    <select name="limit_conn_action" id="limit_conn_action" class="form-control"
+                            [(ngModel)]="datas.config.twaf_limit_conn.action">
+                      <option class="col-md-1"
+                              *ngFor="let item of limit_conn_action_list"
+                              [value]="item.value"
+                      >{{item.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="rowGroup" [hidden]="datas.config.twaf_limit_conn.action != 'redirect'">
+                    <div class="col-md-2">
+                      <input
+                             name="limit_conn_redirect_url"
+                             id="limit_conn_redirect_url"
+                             [(ngModel)]="datas.config.twaf_limit_conn.redirect_url"
+                             class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <select *ngIf="datas.config.twaf_limit_conn.action == 'deny'"
+                            name="limit_conn_action_meta" id="limit_conn_action_meta" class="form-control"
+                            [(ngModel)]="datas.config.twaf_limit_conn.action_meta">
+                      <option class="col-md-1"
+                              *ngFor="let item of codeList"
+                              [value]="item.value"
+                      >{{item.text}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-actions tt-form-actions-center" style="padding-bottom: 25px; padding-top: 15px;">
+                  <footer>
+                    <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit(limitconnForm)">
+                      确 认
+                    </button>&nbsp;&nbsp;
+                    <!-- <button type="button" class="btn btn-primary" (click)="Reset()">
+                       重置
+                     </button>-->
+                    <button type="button" class="btn tt-btn-info btn-sm" [routerLink]="['/pages/policy']">
+                      取 消
+                    </button>
+                  </footer>
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <!-- end widget content -->
+        </div>
+        <!-- end widget div -->
+      </div>
+      <!-- end widget -->
+    </article>
+    <!-- WIDGET END -->
+  </div>
+
+</div>

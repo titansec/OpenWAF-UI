@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <form
+                    class="form-horizontal"
+                    id="line-form"
+                    #policyForm="ngForm"
+            >
+                <div style="background-color:#fff;">
+                    <fieldset>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">名称</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           class="form-control"
+                                           name="name"
+                                           id="name"
+                                           [(ngModel)]="datas.result.name"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-actions tt-form-actions-center">
+                                <footer>
+                                    <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit()">
+                                        确认
+                                    </button>&nbsp;&nbsp;
+                                    <button type="button" class="btn tt-btn-info btn-sm" (click)="bsModalRef.hide()">
+                                        返回
+                                    </button>
+                                </footer>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

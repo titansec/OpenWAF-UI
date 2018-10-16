@@ -1,0 +1,157 @@
+<div id="content">
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div>
+                <!-- widget div-->
+                <!-- widget content -->
+                <div class="widget-body" style="padding: 0 0 0 0px; background: #fff; border-radius: 0.25rem;">
+                    <ul id="myTab1" class="nav nav-tabs bordered">
+                      <li [class.active]=false>
+                        <a routerLink="/pages/policy/secrules/{{_id}}">攻击防护</a>
+                      </li>
+                      <li [class.active]=true>
+                        <a routerLink="/pages/policy/antilink/{{_id}}">防信息滥用</a>
+                      </li>
+                      <li [class.active]=false>
+                        <a routerLink="/pages/policy/limitconn/{{_id}}">防CC</a>
+                      </li>
+                      <li [class.active]=false>
+                        <a routerLink="/pages/policy/antidetection/{{_id}}">防探测</a>
+                      </li>
+                    </ul>
+                    <div class="padding-top-10 col-md-12" style="background: #fff;">
+                        <form class="form-horizontal"
+                              #antilinkForm="ngForm">
+                            <div class="col-md-12">
+
+                                <div class="form-group col-md-12" style="padding-top: 20px;">
+                                    <legend>防信息滥用</legend>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4 control-label">
+                                        状态
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="state" id="hotlink_state_1"
+                                                   (click)="setState(true)"
+                                                   [checked]="datas.config.twaf_anti_hotlink.state" value="1">
+                                            开 </label>
+                                        <label class="radio radio-inline">
+                                            <input type="radio" name="state" id="hotlink_state_0"
+                                                   (click)="setState(false)"
+                                                   [checked]="!datas.config.twaf_anti_hotlink.state" value="0">
+                                            关 </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">文件扩展名</label>
+                                    <div class="col-md-4">
+                                        <rl-tag-input name="uri_ext" [(ngModel)]="datas.config.twaf_anti_hotlink.uri_ext"></rl-tag-input>
+                                        <!--<input smartTags class="form-control tagsinput" name="uri_ext"
+                                               [ngModel]="uri_ext"
+                                               value="{{uri_ext}}" data-role="tagsinput">-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">工作模式</label>
+                                    <div class="col-md-2">
+                                        <select name="mode" id="mode" class="form-control"
+                                                [(ngModel)]="datas.config.twaf_anti_hotlink.mode">
+                                            <option class="col-md-1"
+                                                    *ngFor="let item of mode_list"
+                                                    [value]="item.value"
+                                            >{{item.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [hidden]="datas.config.twaf_anti_hotlink.mode !== 'referer'">
+                                    <div class="rowGroup">
+                                        <label class="col-md-4 control-label" for="exclude">排除</label>
+                                        <div class="col-md-4">
+                                        <textarea id="exclude"
+                                                  [(ngModel)]="exclude"
+                                                  class="form-control" rows="3"
+                                                  name="exclude"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" [hidden]="datas.config.twaf_anti_hotlink.mode !== 'cookie'">
+                                    <div class="rowGroup">
+                                        <label class="col-md-4 control-label" for="entry">入口</label>
+                                        <div class="col-md-4">
+                                        <textarea id="entry"
+                                                  [(ngModel)]="entry"
+                                                  class="form-control" rows="3"
+                                                  name="entry"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="rowGroup">
+                                        <label class="col-md-4 control-label">动作</label>
+                                        <div class="col-md-2">
+                                            <select name="action" id="ant_action" class="form-control"
+                                                    [(ngModel)]="datas.config.twaf_anti_hotlink.action">
+                                                <option class="col-md-1"
+                                                        *ngFor="let item of ant_action_list"
+                                                        [value]="item.value"
+                                                >{{item.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="rowGroup" [hidden]="datas.config.twaf_anti_hotlink.action != 'redirect'">
+                                        <div class="col-md-2">
+                                            <input
+                                                   name="ant_redirect_url"
+                                                   id="ant_redirect_url"
+                                                   [(ngModel)]="datas.config.twaf_anti_hotlink.redirect_url"
+                                                   class="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select *ngIf="datas.config.twaf_anti_hotlink.action == 'deny'"
+                                                name="ant_action_meta" id="ant_action_meta" class="form-control"
+                                                [(ngModel)]="datas.config.twaf_anti_hotlink.action_meta">
+                                            <option class="col-md-1"
+                                                    *ngFor="let item of codeList"
+                                                    [value]="item.value"
+                                            >{{item.text}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions tt-form-actions-center" style="padding-bottom: 25px; padding-top: 15px;">
+                                    <footer>
+                                        <button type="submit" class="btn tt-btn-info btn-sm" (click)="submit(antilinkForm)">
+                                            确 认
+                                        </button>&nbsp;&nbsp;
+                                        <!-- <button type="button" class="btn btn-primary" (click)="Reset()">
+                                           重置
+                                         </button>-->
+                                        <button type="button" class="btn tt-btn-info btn-sm" [routerLink]="['/pages/policy']">
+                                            取 消
+                                        </button>
+                                    </footer>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+
+</div>

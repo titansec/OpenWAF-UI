@@ -1,0 +1,102 @@
+<nb-card>
+  <nb-card-header>
+    站点列表
+    <div class="row">
+      <div class="col-md-12">
+        <div class="offset-md-8 col-md-4">
+          <div class="pull-right" style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 0px; float: right;">
+            <a class="btn tt-btn-info btn-sm" title="添加" (click)="create()" style="margin-right: 5px; color: #fff;">
+              <i class="icon ion-plus-round"></i> 添加
+            </a>
+            <a class="btn tt-btn-info btn-sm" title="刷新" (click)="refresh()" style="color: #fff;">
+              <i class="icon ion-loop"></i> 刷新
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <!--<ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>-->
+    <ngx-datatable
+      #table
+      class="table-striped table-hover"
+      [rows]="rows"
+      [loadingIndicator]="loadingIndicator"
+      [columnMode]="'force'"
+      [headerHeight]="40"
+      [footerHeight]="45"
+      [rowHeight]="'auto'"
+      [messages]="{
+                emptyMessage: '无数据',
+                totalMessage: '条',
+                selectedMessage: '选中'
+            }"
+
+      [cssClasses]="{
+        sortAscending: 'fa fa-caret-up',
+        sortDescending: 'fa fa-caret-down',
+        pagerLeftArrow: 'fa  fa-angle-left',
+        pagerRightArrow: 'fa fa-angle-right',
+        pagerPrevious: 'fa fa-angle-double-left',
+        pagerNext: 'fa fa-angle-double-right'
+      }"
+      [reorderable]="reorderable">
+      <ngx-datatable-column name="host" [width]="150">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>域名</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <div [innerHTML]="value"></div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="port" [width]="50">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>端口</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <div [innerHTML]="value"></div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="path" [width]="150">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>路径</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="port" [width]="150">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>服务器</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['forward_addr']}}:{{row['forward_port']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="policy" [width]="150">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>策略</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span>{{value}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="uuid" [width]="100">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>操作</strong>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <a class="btn tt-btn-success btn-xs" title="编辑" (click)="edit(row)" style="color: #fff; margin-right: 5px;">
+            <i class="icon ion-edit"></i> 编辑
+          </a>
+          <a class="btn tt-btn-warning btn-xs" title="删除" (click)="delete(row)" style="color: #fff;">
+            <i class="icon ion-trash-a"></i> 删除
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </nb-card-body>
+</nb-card>
