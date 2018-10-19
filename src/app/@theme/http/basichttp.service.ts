@@ -56,6 +56,7 @@ export class BasicHttpService {
         reqOpts.headers = reqOpts.headers.set('Authorization', 'icsexamuser ' + token)
       }
     }*/
+      url = localStorage.getItem('url') + url;
     return this._http.request(method, url, reqOpts)
       .pipe(catchError(error => {
         let code = 422;
@@ -87,7 +88,7 @@ export class BasicHttpService {
       .pipe(map(
         res => {
           const rows = [];
-          for (let val in res['result']) {
+          for (const val in res['result']) {
             if (val !== 'policy_uuids') {
               rows.push(
                 {

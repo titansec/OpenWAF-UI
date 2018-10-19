@@ -5,6 +5,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
+import {Urls} from "./@theme/const/url";
 
 @Component({
   selector: 'ngx-app',
@@ -17,5 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.analytics.trackPageViews();
+    localStorage.setItem('url', Urls.baseUrl);
   }
 }

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BasicHttpService} from "../../@theme/http/basichttp.service";
-import {Urls} from "../../@theme/const/url";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,7 @@ import {Urls} from "../../@theme/const/url";
 @Injectable()
 export class PolicyService {
 
-    policyUrl = Urls.baseUrl + '/policy';
+    policyUrl = '/policy';
 
     constructor(private _basicHttpService: BasicHttpService) {
     }

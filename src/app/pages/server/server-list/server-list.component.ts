@@ -43,7 +43,6 @@ export class ServerListComponent implements OnInit {
   setPage() {
 
     this._service.getAccessRuleList().subscribe(data => {
-      console.log('data', data);
       this.rows = data['result'];
       this.loadingIndicator = false;
     });

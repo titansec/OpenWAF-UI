@@ -6,8 +6,8 @@ import {BasicHttpService} from "../../@theme/http/basichttp.service";
   providedIn: 'root'
 })
 export class ServerService {
-  accessRuleUrl = Urls.baseUrl + '/access_rule';
-  policyUrl = Urls.baseUrl + '/policy/policy_uuids';
+  accessRuleUrl = '/access_rule';
+  policyUrl = '/policy/policy_uuids';
 
   constructor(private _basicHttpService: BasicHttpService) {
 

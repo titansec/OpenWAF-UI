@@ -7,7 +7,17 @@
   <div class="pull-right">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
   </div>
-  <!-- <ngx-theme-switcher></ngx-theme-switcher> -->
+    <div>
+        <form class="form-horizontal">
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="inputHost" name="host" [(ngModel)]="host" placeholder="http://" (keypress)="($event.which === 13)?setHost():0">
+                </div>
+                <div class="col-md-3"><button class="btn btn-sm">设置API地址</button></div>
+            </div>
+        </form>
+    </div>
+   <!--<ngx-theme-switcher></ngx-theme-switcher>-->
 </div>
 
 <div class="header-container">

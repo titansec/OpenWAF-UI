@@ -3,4 +3,24 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://192.168.39.252:8443/svn/tcloud/branches" />
+                  <option value="https://192.168.39.252:8443/svn/tcloud/doc" />
+                  <option value="https://192.168.39.252:8443/svn/tcloud/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://192.168.39.252:8443/svn/tcloud/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
 </project>
