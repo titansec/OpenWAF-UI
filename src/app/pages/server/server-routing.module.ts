@@ -7,17 +7,6 @@ import {ServerListComponent} from "./server-list/server-list.component";
 const routes: Routes = [{
   path: '',
   component: ServerComponent,
-  children: [
-    {
-      path: '',
-      redirectTo: 'server-list',
-      pathMatch: 'full',
-    },
-    {
-      path: 'server-list',
-      component: ServerListComponent,
-    }
-  ],
 }];
 
 @NgModule({

@@ -13,7 +13,7 @@
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="inputHost" name="host" [(ngModel)]="host" placeholder="http://" (keypress)="($event.which === 13)?setHost():0">
                 </div>
-                <div class="col-md-3"><button class="btn btn-sm">设置API地址</button></div>
+                <div class="col-md-3"><button class="btn btn-sm" (click)="setHost()">设置API地址</button></div>
             </div>
         </form>
     </div>
