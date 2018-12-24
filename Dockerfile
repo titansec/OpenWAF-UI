@@ -15,8 +15,7 @@ ARG OPENWAF_UI_PREFIX="/opt"
 ARG NODEJS_VERSION="v10.12.0"
 ARG ANGULAR_CLI_VERSION="6.2.5"
 
-RUN apt-get update \
-    && apt-get install wget xz-utils -y
+RUN apt-get update
 
 # Install OpenWAF-UI
 RUN cd ${OPENWAF_UI_PREFIX} \
